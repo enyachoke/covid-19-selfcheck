@@ -1,0 +1,21 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: covid-19-selfcheck
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: covid-19-selfcheck
+  template:
+    metadata:
+      labels:
+        app: covid-19-selfcheck
+    spec:
+      containers:
+        - name: covid-19-selfcheck
+          image: enyachoke/covid-19-selfcheck
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+      restartPolicy: Always

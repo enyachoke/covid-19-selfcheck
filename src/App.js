@@ -1,24 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Suspense } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Navbar, NavbarBrand } from 'reactstrap';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 import './App.css';
+const Recommendation = React.lazy(() => import('./components/Recommendation'));
+const Infomation = React.lazy(() => import('./components/Infomation'));
+const SelfCheck = React.lazy(() => import('./components/SelfCheck'));
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <Navbar color="light" light expand="md">
+          <NavbarBrand href="/">Covid-19 Self Check</NavbarBrand>
+        </Navbar>
+        <Container className="mt-2">
+          <Switch>
+            <Route path="/covid-19-info">
+              <Suspense fallback={<div>Loading...</div>}>
+                <Infomation />
+              </Suspense>
+            </Route>
+            <Route path="/recommendations">
+              <Suspense fallback={<div>Loading...</div>}>
+                <Recommendation />
+              </Suspense>
+            </Route>
+            <Route path="/">
+              <Suspense fallback={<div>Loading...</div>}>
+                <SelfCheck />
+              </Suspense>
+            </Route>
+        /</Switch>
+
+        </Container>
+      </Router>
     </div>
   );
 }

@@ -1,0 +1,205 @@
+{
+    "display": "wizard",
+    "settings": {
+        "pdf": {
+            "id": "1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
+            "src": "https://files.form.io/pdf/5692b91fd1028f01000407e3/file/1ec0f8ee-6685-5d98-a847-26f67b67d6f0"
+        }
+    },
+    "components": [
+        {
+            "title": "Personal Information",
+            "label": "Page 1",
+            "type": "panel",
+            "key": "page1",
+            "components": [
+                {
+                    "label": "Age",
+                    "mask": false,
+                    "spellcheck": true,
+                    "tableView": false,
+                    "delimiter": false,
+                    "requireDecimal": false,
+                    "inputFormat": "plain",
+                    "calculateServer": false,
+                    "key": "age",
+                    "type": "number",
+                    "input": true
+                }
+            ],
+            "input": false,
+            "tableView": false,
+            "breadcrumbClickable": true,
+            "buttonSettings": {
+                "previous": true,
+                "cancel": true,
+                "next": true
+            },
+            "collapsible": false
+        },
+        {
+            "title": "Screening",
+            "label": "Self Screening",
+            "type": "panel",
+            "key": "page2",
+            "components": [
+                {
+                    "label": "Symptoms",
+                    "tableView": false,
+                    "questions": [
+                        {
+                            "label": "Do you have a cough?",
+                            "value": "cough "
+                        },
+                        {
+                            "label": "Do you have a fever?",
+                            "value": "fever"
+                        },
+                        {
+                            "label": "Are you experiencing  shortness of breath?",
+                            "value": "difficultyBreathing"
+                        }
+                    ],
+                    "values": [
+                        {
+                            "label": "Yes",
+                            "value": "yes"
+                        },
+                        {
+                            "label": "No",
+                            "value": "no"
+                        }
+                    ],
+                    "calculateServer": false,
+                    "validate": {
+                        "required": true
+                    },
+                    "key": "selfScreening",
+                    "type": "survey",
+                    "input": true
+                },
+                {
+                    "label": "Exposure",
+                    "tableView": false,
+                    "questions": [
+                        {
+                            "label": "Have you traveled outside the country over the last 14 days?",
+                            "value": "traveled"
+                        },
+                        {
+                            "label": "Have you been in close contact with a person confirmed or suspected to have Covid-19 prior to showing symptoms?",
+                            "value": "contactWithcase"
+                        },
+                        {
+                            "label": "Have you visited or worked in a facility where cases of Covid-19 have been reported?",
+                            "value": "beenAtPlaceWithCase"
+                        }
+                    ],
+                    "values": [
+                        {
+                            "label": "Yes",
+                            "value": "yes"
+                        },
+                        {
+                            "label": "No",
+                            "value": "no"
+                        }
+                    ],
+                    "calculateServer": false,
+                    "validate": {
+                        "required": true
+                    },
+                    "key": "exposure",
+                    "type": "survey",
+                    "input": true
+                },
+                {
+                    "label": "Complication Risk",
+                    "tableView": false,
+                    "questions": [
+                        {
+                            "label": "Do you have any pre existing conditions?",
+                            "value": "preExistingConditions"
+                        }
+                    ],
+                    "values": [
+                        {
+                            "label": "Yes",
+                            "value": "yes"
+                        },
+                        {
+                            "label": "No",
+                            "value": "no"
+                        }
+                    ],
+                    "calculateServer": false,
+                    "validate": {
+                        "required": true
+                    },
+                    "key": "complicationRisk",
+                    "type": "survey",
+                    "input": true
+                }
+            ],
+            "input": false,
+            "tableView": false,
+            "breadcrumbClickable": true,
+            "buttonSettings": {
+                "previous": true,
+                "cancel": true,
+                "next": true
+            },
+            "collapsible": false
+        },
+        {
+            "title": "Danger Signs",
+            "label": "Page 3",
+            "type": "panel",
+            "key": "page3",
+            "components": [
+                {
+                    "label": "Danger Signs",
+                    "tableView": false,
+                    "questions": [
+                        {
+                            "label": "Are you having difficulty breathing or shortness of breath?",
+                            "value": "difficultyBreathing"
+                        },
+                        {
+                            "label": "Are you persistent pain or pressure in the chest?",
+                            "value": "chestPains"
+                        },
+                        {
+                            "label": "Are you having confusion or inability to arouse?",
+                            "value": "confusion"
+                        }
+                    ],
+                    "values": [
+                        {
+                            "label": "Yes",
+                            "value": "yes"
+                        },
+                        {
+                            "label": "No",
+                            "value": "no"
+                        }
+                    ],
+                    "calculateServer": false,
+                    "key": "dangerSigns",
+                    "type": "survey",
+                    "input": true
+                }
+            ],
+            "input": false,
+            "tableView": false,
+            "theme": "danger",
+            "breadcrumbClickable": true,
+            "buttonSettings": {
+                "previous": true,
+                "cancel": true,
+                "next": true
+            },
+            "collapsible": false
+        }
+    ]
+}

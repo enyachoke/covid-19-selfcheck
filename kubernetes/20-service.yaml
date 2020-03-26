@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: covid-19-selfcheck
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  selector:
+    app: covid-19-selfcheck
