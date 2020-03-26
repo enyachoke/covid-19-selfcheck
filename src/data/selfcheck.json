@@ -44,41 +44,6 @@
             "key": "page2",
             "components": [
                 {
-                    "label": "Symptoms",
-                    "tableView": false,
-                    "questions": [
-                        {
-                            "label": "Do you have a cough?",
-                            "value": "cough "
-                        },
-                        {
-                            "label": "Do you have a fever?",
-                            "value": "fever"
-                        },
-                        {
-                            "label": "Are you experiencing  shortness of breath?",
-                            "value": "difficultyBreathing"
-                        }
-                    ],
-                    "values": [
-                        {
-                            "label": "Yes",
-                            "value": "yes"
-                        },
-                        {
-                            "label": "No",
-                            "value": "no"
-                        }
-                    ],
-                    "calculateServer": false,
-                    "validate": {
-                        "required": true
-                    },
-                    "key": "selfScreening",
-                    "type": "survey",
-                    "input": true
-                },
-                {
                     "label": "Exposure",
                     "tableView": false,
                     "questions": [
@@ -98,11 +63,11 @@
                     "values": [
                         {
                             "label": "Yes",
-                            "value": "yes"
+                            "value": true
                         },
                         {
                             "label": "No",
-                            "value": "no"
+                            "value": false
                         }
                     ],
                     "calculateServer": false,
@@ -110,6 +75,41 @@
                         "required": true
                     },
                     "key": "exposure",
+                    "type": "survey",
+                    "input": true
+                },
+                {
+                    "label": "Symptoms",
+                    "tableView": false,
+                    "questions": [
+                        {
+                            "label": "Do you have a cough?",
+                            "value": "cough"
+                        },
+                        {
+                            "label": "Do you have a fever?",
+                            "value": "fever"
+                        },
+                        {
+                            "label": "Are you experiencing  shortness of breath?",
+                            "value": "difficultyBreathing"
+                        }
+                    ],
+                    "values": [
+                        {
+                            "label": "Yes",
+                            "value": true
+                        },
+                        {
+                            "label": "No",
+                            "value": false
+                        }
+                    ],
+                    "calculateServer": false,
+                    "validate": {
+                        "required": true
+                    },
+                    "key": "selfScreening",
                     "type": "survey",
                     "input": true
                 },
@@ -125,11 +125,11 @@
                     "values": [
                         {
                             "label": "Yes",
-                            "value": "yes"
+                            "value": true
                         },
                         {
                             "label": "No",
-                            "value": "no"
+                            "value": false
                         }
                     ],
                     "calculateServer": false,
@@ -151,6 +151,7 @@
             },
             "collapsible": false
         },
+
         {
             "title": "Danger Signs",
             "label": "Page 3",
@@ -177,11 +178,11 @@
                     "values": [
                         {
                             "label": "Yes",
-                            "value": "yes"
+                            "value": true
                         },
                         {
                             "label": "No",
-                            "value": "no"
+                            "value": false
                         }
                     ],
                     "calculateServer": false,
