@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import './App.css';
 const Recommendation = React.lazy(() => import('./components/Recommendation'));
-const Infomation = React.lazy(() => import('./components/Infomation'));
+const Information = React.lazy(() => import('./components/Information'));
 const SelfCheck = React.lazy(() => import('./components/SelfCheck'));
 
 
@@ -23,7 +23,7 @@ function App() {
           <Switch>
             <Route path="/covid-19-info">
               <Suspense fallback={<div>Loading...</div>}>
-                <Infomation />
+                <Information />
               </Suspense>
             </Route>
             <Route path="/recommendations">

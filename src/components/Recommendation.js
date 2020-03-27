@@ -1,68 +1,129 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Redirect } from "react-router-dom";
-import { Card, CardBody, CardText, CardTitle } from 'reactstrap';
+import React from 'react'
+import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { Card, CardBody, CardText, CardTitle,ListGroup,ListGroupItem } from 'reactstrap'
 import { resetFormData } from '../actions/selfCheck'
-function Recommendation(props) {
-    const { resetFormData, formData } = props;
-    const getPerc = (obj1, obj2) => {
-        var count = [0, 0];
-        for (var key in obj1) {
-            count[1]++; // total count
-            console.log('first', obj1[key], key);
-            console.log('second', obj2[key], key);
-            if (obj2.hasOwnProperty(key) && obj2[key] === obj1[key]) {
-                count[0]++; // match count
-            }
-        }
-        var percentage = count[0] / count[1] * 100 + "%";
-        console.log(percentage);
-    }
-    const selfScreening = {
-        cough: 'yes',
-        fever: 'yes',
-        difficultyBreathing: 'yes',
-        traveledOutside: 'yes',
-        contactWithcase: 'yes',
-        beenInAffectedFacility: 'yes'
-    }
-    //getPerc(form.data.selfScreening, selfScreening);
-    //getPerc(form.data.dangerSigns, dangerSigns)
-    const dangerSigns = {
-        difficultyBreathing: 'yes',
-        chestPains: 'yes',
-        confusion: 'yes'
-    }
-    const prettyFormData = JSON.stringify(formData, null, 2);
+
+
+function Recommendation (props) {
+  const { resetFormData, formData } = props
+ // const [recommendations, setRecommendations] = React.useState(null)
+  const history = useHistory()
+
+  const possibleOutComes = {
+    'outcomes': [
+      {
+        'label': 'veryIll',
+        'value': '\n' +
+          'Call the Ministry of Health emergency teams on hotlines: 0729471414/0732353535 if you have a medical emergency:\n ' +
+          'Notify the operator that you have or think you might have, COVID-19. \n' +
+          'If possible, put on a facemask before medical help arrives or visit the nearest health facility.',
+      },
+      {
+        'label': 'mildIllness',
+        'value': 'https://www.cdc.gov/coronavirus/2019-ncov/if-you-are-sick/steps-when-sick.html\n',
+      },
+      {
+        'label': 'OlderAdults',
+        'value': 'https://www.cdc.gov/coronavirus/2019-ncov/specific-groups/high-risk-complications/older-adults.html\n',
+      },
+      {
+        'label': 'existingMedicalCondition',
+        'value': 'http://www.health.go.ke/wp-content/uploads/2020/03/COVID-19-PLHIV-Literacy-materials-23rd-March-1.pdf\n',
+      },
+
+    ],
+  }
+
+
+  let items = []
     if (!formData?.selfScreening && !formData?.dangerSigns) {
-        return <Redirect to='/' />
+      history.push('/')
+    } else {
+      const exposed = (() => {
+        let exposurethreshold = 0
+        let exposure = Object.values(formData.exposure)
+        exposure.forEach((element) => {
+          if (element === 'true') {
+            exposurethreshold += 1
+          }
+        })
+        return exposurethreshold
+
+      })
+
+      const selfScreeningThreshold = (() => {
+        let screenOutcomeThreshold = 0
+        let selfScreening = Object.values(formData.selfScreening)
+        selfScreening.forEach((element) => {
+          if (element === 'true') {
+            screenOutcomeThreshold += 1
+          }
+        })
+        return screenOutcomeThreshold
+      })
+      const dangerThreshold = (() => {
+        let danger = 0
+        let dangerSigns = Object.values(formData.dangerSigns)
+        dangerSigns.forEach((element) => {
+          if (element === 'true') {
+            danger += 1
+          }
+        })
+        return danger
+      })
+      console.log("Aye", exposed(), dangerThreshold(), selfScreeningThreshold())
+      if (exposed() > 0 ) {
+        items.push(possibleOutComes.outcomes[1].value)
+        if (formData.age >= 65) {
+          items.push(possibleOutComes.outcomes[2].value)
+        }
+        if (selfScreeningThreshold() > 1 || dangerThreshold() > 1) {
+          items =[];
+          items.push(possibleOutComes.outcomes[0].value)
+        }
+        if (formData.complicationRisk.preExistingConditions === "true") {
+          items.push(possibleOutComes.outcomes[3].value)
+        }
+      } else if(selfScreeningThreshold() > 1 || dangerThreshold() > 1){
+        items =[];
+        items.push(possibleOutComes.outcomes[0].value)
+      }else  {
+        items.push(
+          'You are healthy. This application is only for those feeling ill')
+      }
     }
-    return (
-
-        <>
-            <Card>
-                <CardBody>
-                    <CardTitle>Recommendations</CardTitle>
-                    <CardText>{prettyFormData}</CardText>
-                </CardBody>
-            </Card>
 
 
-        </>
-    )
+  return (
+
+    <>
+      <Card>
+        <CardBody>
+          <CardTitle>Recommendations</CardTitle>
+          <ListGroup>
+            { items.map(item =><ListGroupItem tag="a" key={item} href={item}>{item}</ListGroupItem> )}
+          </ListGroup>
+        </CardBody>
+      </Card>
+
+
+    </>
+  )
 }
+
 const mapStateTopProps = (state) => {
-    return {
-        formData: state.selfCheck.formData
-    }
+  return {
+    formData: state.selfCheck.formData,
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        resetFormData: () => {
-            dispatch(resetFormData());
-        },
-    }
+  return {
+    resetFormData: () => {
+      dispatch(resetFormData())
+    },
+  }
 }
 
-export default connect(mapStateTopProps, mapDispatchToProps)(Recommendation);
+export default connect(mapStateTopProps, mapDispatchToProps)(Recommendation)
