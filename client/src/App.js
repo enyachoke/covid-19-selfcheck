@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Navbar, NavbarBrand } from 'reactstrap';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
@@ -10,6 +10,7 @@ import './App.css';
 const Recommendation = React.lazy(() => import('./components/Recommendation'));
 const Information = React.lazy(() => import('./components/Information'));
 const SelfCheck = React.lazy(() => import('./components/SelfCheck'));
+const CallApp = React.lazy(() => import('./components/call/CallApp'));
 
 
 function App() {
@@ -29,6 +30,11 @@ function App() {
             <Route path="/recommendations">
               <Suspense fallback={<div>Loading...</div>}>
                 <Recommendation />
+              </Suspense>
+            </Route>
+            <Route path="/consult">
+              <Suspense fallback={<div>Loading...</div>}>
+                <CallApp />
               </Suspense>
             </Route>
             <Route path="/">

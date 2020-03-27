@@ -1,0 +1,15 @@
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
+
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+@import "variables";
+@import "shared/base";
+.btn-action {
+  outline: none;
+  border: none;
+}
+@import "main-window";
+@import "call-window";
+@import "call-modal";
