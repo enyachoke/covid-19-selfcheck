@@ -11,7 +11,9 @@ function Doctor() {
         'outcomes': ["a", "b"
         ],
     }
-    let ref = Firebase.database().ref('/');
+
+    let ref = Firebase.database().ref('/callQueue/calls/');
+
 
     React.useEffect(() => {
         const listener =ref.on('value', snapshot => {
@@ -29,7 +31,10 @@ function Doctor() {
                 <CardBody>
                     <CardTitle>Client's Queue</CardTitle>
                     <ListGroup>
-                        {Object.keys(a).map((key,value) => <ListGroupItem tag="a" key={key} href={"/#/doctor/" + a[value].clientId}>Client No.{a[value].clientId}</ListGroupItem>)}
+                        {Object.keys(a).map((key,value) => 
+                        <ListGroupItem tag="a" key={key} href={"/#/doctor/" + a[value].clientId+"/"+a[value].county}>
+                            Client No.{a[value].clientId}
+                        </ListGroupItem>)}
                     </ListGroup>
                 </CardBody>
             </Card>

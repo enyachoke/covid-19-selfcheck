@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'formiojs/dist/formio.full.css'
 import { Container, Navbar, NavbarBrand } from 'reactstrap';
 import {
   HashRouter as Router,
@@ -22,6 +23,7 @@ function App() {
       <Router>
         <Navbar color="light" light expand="md">
           <NavbarBrand href="/">Covid-19 Self Check</NavbarBrand>
+          <NavbarBrand href="/#/doctor">Doctor Panel</NavbarBrand>
         </Navbar>
         <Navbar color="light" light expand="md">
           <NavbarBrand href="/#/doctor">Doctor Panel</NavbarBrand>
@@ -38,12 +40,14 @@ function App() {
                 <Recommendation />
               </Suspense>
             </Route>
-            <Route path="/consult/:county">
+            <Route path="/consult/:county/:formId/:riskLevel">
               <Suspense fallback={<div>Loading...</div>}>
                 <CallApp />
               </Suspense>
             </Route>
-            <Route path="/doctor/:callId">
+
+            <Route path="/doctor/:callId/:county">
+
               <Suspense fallback={<div>Loading...</div>}>
                 <CallApp />
               </Suspense>
