@@ -25,6 +25,20 @@
                     "key": "age",
                     "type": "number",
                     "input": true
+                },
+                {
+                    "label": "County",
+                    "mask": false,
+                    "spellcheck": true,
+                    "tableView": false,
+                    "delimiter": false,
+                    "requireDecimal": false,
+                    "inputFormat": "plain",
+                    "calculateServer": false,
+                    "key": "county",
+                    "type": "textfield",
+                    "placeholder":"Enter county of residence",
+                    "input": true
                 }
             ],
             "input": false,

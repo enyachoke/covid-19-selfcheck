@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { Card, CardBody, CardText, CardTitle,ListGroup,ListGroupItem } from 'reactstrap'
 import { resetFormData } from '../actions/selfCheck'
 
-
+import Firebase from 'firebase';
 function Recommendation (props) {
   const { resetFormData, formData } = props
  // const [recommendations, setRecommendations] = React.useState(null)
@@ -72,7 +72,6 @@ function Recommendation (props) {
         })
         return danger
       })
-      console.log("Aye", exposed(), dangerThreshold(), selfScreeningThreshold())
       if (exposed() > 0 ) {
         items.push(possibleOutComes.outcomes[1].value)
         if (formData.age >= 65) {
@@ -81,6 +80,7 @@ function Recommendation (props) {
         if (selfScreeningThreshold() > 1 || dangerThreshold() > 1) {
           items =[];
           items.push(possibleOutComes.outcomes[0].value)
+          history.push('/consult/'+formData.county)
         }
         if (formData.complicationRisk.preExistingConditions === "true") {
           items.push(possibleOutComes.outcomes[3].value)
@@ -88,6 +88,7 @@ function Recommendation (props) {
       } else if(selfScreeningThreshold() > 1 || dangerThreshold() > 1){
         items =[];
         items.push(possibleOutComes.outcomes[0].value)
+        history.push('/consult/'+formData.county)
       }else  {
         items.push(
           'You are healthy. This application is only for those feeling ill')

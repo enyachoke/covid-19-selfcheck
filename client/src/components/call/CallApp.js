@@ -7,6 +7,7 @@ import CallWindow from './CallWindow';
 import CallModal from './CallModal';
 import './css/app.scss';
 
+
 class CallApp extends Component {
   constructor() {
     super();
@@ -16,7 +17,8 @@ class CallApp extends Component {
       callModal: '',
       callFrom: '',
       localSrc: null,
-      peerSrc: null
+      peerSrc: null,
+      developers: []
     };
     this.pc = {};
     this.config = null;
@@ -28,8 +30,9 @@ class CallApp extends Component {
   componentDidMount() {
     socket
       .on('init', ({ id: clientId }) => {
-        document.title = `${clientId} - VideoCall`;
+        document.title = `${clientId} - Consultation`;
         this.setState({ clientId });
+        
       })
       .on('request', ({ from: callFrom }) => {
         this.setState({ callModal: 'active', callFrom });
