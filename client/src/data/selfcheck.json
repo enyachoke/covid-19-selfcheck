@@ -24,8 +24,127 @@
                     "calculateServer": false,
                     "key": "age",
                     "type": "number",
-                    "input": true
+                    "input": true,
+                    "validate": {
+                        "required": true
+                    }
+                },
+                {
+                    "label": "Select County",
+                    "widget": "choicesjs",
+                    "tableView": true,
+                    "dataSrc": "url",
+                    "data": {
+                        "values": [
+                            {
+                                "label": "",
+                                "value": ""
+                            }
+                        ],
+                        "url": "https://iebc.emmanuelnyachoke.com/county/",
+                        "headers": [
+                            {
+                                "key": "",
+                                "value": ""
+                            }
+                        ]
+                    },
+                    "valueProperty": "code",
+                    "template": "<span>{{ item.name }}</span>",
+                    "selectThreshold": 0.3,
+                    "calculateServer": false,
+                    "key": "selectCounty",
+                    "type": "select",
+                    "indexeddb": {
+                        "filter": {}
+                    },
+                    "selectValues": "region.locations",
+                    "input": true,
+                    "lazyLoad": false,
+                    "disableLimit": false,
+                    "validate": {
+                        "required": true
+                    }
+                },
+                {
+                    "label": "Constituency",
+                    "widget": "choicesjs",
+                    "tableView": true,
+                    "dataSrc": "url",
+                    "data": {
+                        "values": [
+                            {
+                                "label": "",
+                                "value": ""
+                            }
+                        ],
+                        "url": "https://iebc.emmanuelnyachoke.com/constituency/",
+                        "headers": [
+                            {
+                                "key": "",
+                                "value": ""
+                            }
+                        ]
+                    },
+                    "valueProperty": "code",
+                    "template": "<span>{{ item.name }}</span>",
+                    "selectThreshold": 0.3,
+                    "calculateServer": false,
+                    "key": "constituency",
+                    "conditional": {
+                        "show": false,
+                        "when": "selectCounty"
+                    },
+                    "type": "select",
+                    "indexeddb": {
+                        "filter": {}
+                    },
+                    "selectValues": "region.locations",
+                    "filter": "county={{data.selectCounty}}",
+                    "refreshOn": "selectCounty",
+                    "input": true,
+                    "lazyLoad": false,
+                    "disableLimit": false,
+                    "validate": {
+                        "required": true
+                    }
+                },
+                {
+                    "label": "Ward",
+                    "tableView": true,
+                    "dataSrc": "url",
+                    "data": {
+                        "url": "https://iebc.emmanuelnyachoke.com/ward/",
+                        "headers": [
+                            {
+                                "key": "",
+                                "value": ""
+                            }
+                        ]
+                    },
+                    "valueProperty": "code",
+                    "template": "<span>{{ item.name }}</span>",
+                    "selectThreshold": 0.3,
+                    "calculateServer": false,
+                    "key": "ward",
+                    "conditional": {
+                        "show": false,
+                        "when": "constituency"
+                    },
+                    "type": "select",
+                    "indexeddb": {
+                        "filter": {}
+                    },
+                    "filter": "constituency={{data.constituency}}",
+                    "input": true,
+                    "lazyLoad": false,
+                    "selectValues": "region.locations",
+                    "disableLimit": false,
+                    "validate": {
+                        "required": true
+                    }
                 }
+
             ],
             "input": false,
             "tableView": false,
