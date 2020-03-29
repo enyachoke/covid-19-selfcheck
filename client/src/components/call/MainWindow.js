@@ -4,6 +4,7 @@ import {
   useParams
 } from "react-router-dom";
 import Firebase from 'firebase';
+
 import possibleOutComes from "../../constants/outcomes"
 function MainWindow({ startCall, clientId }) {
   const [friendID, setFriendID] = useState(null);
@@ -58,7 +59,9 @@ function MainWindow({ startCall, clientId }) {
   <h4>{sessionStatus}</h4>
       </div>
       <div>
+
         {!callId ? possibleOutComes.outcomes[0].value:null}
+
         <div>
           <button
             type="button"

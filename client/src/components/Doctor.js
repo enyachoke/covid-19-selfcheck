@@ -11,7 +11,9 @@ function Doctor() {
         'outcomes': ["a", "b"
         ],
     }
+
     let ref = Firebase.database().ref('/callQueue/calls/');
+
 
     React.useEffect(() => {
         const listener =ref.on('value', snapshot => {
@@ -41,6 +43,7 @@ function Doctor() {
         </>
     )
 }
+
 const mapStateTopProps = (state) => {
     return {
         formData: state.selfCheck.formData,

@@ -6,6 +6,7 @@ import { resetFormData } from '../actions/selfCheck'
 
 import Firebase from 'firebase';
 import possibleOutComes from "../constants/outcomes"
+
 function Recommendation (props) {
   const { resetFormData, formData } = props
  // const [recommendations, setRecommendations] = React.useState(null)

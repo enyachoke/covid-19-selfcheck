@@ -5,6 +5,7 @@ import { Form } from 'react-formio';
 import { setFormData } from '../actions/selfCheck'
 import data from '../data/selfcheck.json';
 import Firebase from 'firebase';
+
 function SelfCheck(props) {
     const history = useHistory();
     const { setFormData} = props;
@@ -24,7 +25,6 @@ function SelfCheck(props) {
         <div>
             <Form form={data} onSubmit={handleSubmit} />
         </div>
-
     );
 }
 const mapStateTopProps = (state) => {

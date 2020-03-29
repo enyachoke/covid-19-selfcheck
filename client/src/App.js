@@ -25,6 +25,9 @@ function App() {
           <NavbarBrand href="/">Covid-19 Self Check</NavbarBrand>
           <NavbarBrand href="/#/doctor">Doctor Panel</NavbarBrand>
         </Navbar>
+        <Navbar color="light" light expand="md">
+          <NavbarBrand href="/#/doctor">Doctor Panel</NavbarBrand>
+        </Navbar>
         <Container className="mt-2">
           <Switch>
             <Route path="/covid-19-info">
@@ -42,7 +45,9 @@ function App() {
                 <CallApp />
               </Suspense>
             </Route>
+
             <Route path="/doctor/:callId/:county">
+
               <Suspense fallback={<div>Loading...</div>}>
                 <CallApp />
               </Suspense>
