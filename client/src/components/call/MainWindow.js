@@ -1,40 +1,48 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
+import {
+  useParams
+} from "react-router-dom";
+import Firebase from 'firebase';
 function MainWindow({ startCall, clientId }) {
   const [friendID, setFriendID] = useState(null);
-
+  const [sessionStatus, setSessionStatus] = useState("Start Consultation with a doctor");
+  let { county, callId } = useParams();
+  console.log(callId, county)
   /**
    * Start the call with or without video
    * @param {Boolean} video
    */
+  
   const callWithVideo = (video) => {
-    const config = { audio: true, video };
-    return () => friendID && startCall(true, friendID, config);
+    if(!callId){  
+      const config = { audio: true, video };
+      Firebase.database().ref('/'+county+clientId).set({
+        clientId
+      });
+      return () => county && startCall(true, county+"-"+clientId, config); //&& AddToQueue("Waiting for a doctor to join the call."); 
+    }else{
+      const config = { audio: true, video };
+      return () => callId && startCall(true, callId, config); //&& AddToQueue("Waiting for a doctor to join the call.");
+    }
   };
 
   return (
     <div className="container main-window">
       <div>
         <h3>
-          Hi, your ID is
-          <input
-            type="text"
-            className="txt-clientId"
-            defaultValue={clientId}
-            readOnly
-          />
+          Hi, 
         </h3>
-        <h4>Get started by calling a friend below</h4>
+  <h4>{sessionStatus}</h4>
       </div>
       <div>
-        <input
+        {/* <input
           type="text"
           className="txt-clientId"
           spellCheck={false}
           placeholder="Your friend ID"
           onChange={(event) => setFriendID(event.target.value)}
-        />
+        /> */}
         <div>
           <button
             type="button"
